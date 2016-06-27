@@ -19,8 +19,13 @@ class BlogController extends Controller
     {
         $posts = "Some Blog Post";
 
+        $html = $this->container->get('templating')->render(
+            'blog/home.html.twig',
+            array('posts' => $posts)
+        );
         return new Response(
-            '<html><body>Post: '.$posts.'</body></html>'
+            //  '<html><body>Post: '.$posts.'</body></html>'
+            $html
         );
 
     }
