@@ -3,5 +3,14 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1> Blog Posts: {{ posts }}</h1>
+    {% for item in posts %}
+        <h1> {{ item.author }}</h1>
+        <p>{{item.content}}</p>
+    {% endfor %}
+(#
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+#}
+
 {% endblock  %}
