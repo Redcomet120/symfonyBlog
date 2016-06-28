@@ -7,13 +7,13 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-/*
+
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
- */
+
 use AppBundle\Entity\Post;
-//use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Request;
 
 
 
@@ -26,9 +26,10 @@ class BlogController extends Controller
     //    public function homeAction(Request $request)
     public function homeAction()
     {
-        $posts = showAction();
-
-   //     $form = formAction();
+         $repo = $this->getDoctrine()
+             ->getRepository('AppBundle:Post');
+         $posts = $repo->findAll();
+  //     $form = formAction();
   //      $form->handleRequest($request);
   //      if ($form->isSubmitted()){
   //          return $this-redirecttoRoute('/Blog/home');
@@ -53,8 +54,14 @@ class BlogController extends Controller
     //api call to all posts
     public function apiHomeAction()
     {
-//        $posts = "Some API post";
-        $posts = this->showAction();
+        $repo = $this->getDoctrine()
+            ->getRepository('AppBundle:Post');
+        //        $posts = $repo->findAll();
+        $posts = $repo->find(2);
+        if(!$posts)
+        {
+            $posts = "can't find anything";
+        }
         return new JsonResponse($posts);
     }
 /*
@@ -68,7 +75,10 @@ class BlogController extends Controller
             ->getForm();
         return($form);
     }
-/*
+ */
+    /**
+     *  @Route("/api/create")
+     */
     public function createAction()
     {
         $post = new Post();
@@ -81,15 +91,7 @@ class BlogController extends Controller
 
         return new Response('Saved new Post:'.$post->getId());
     }
- */
-    public function showAction()
-    {
 
-        $repo = $this->getDoctrine()
-            ->getRepository('AppBundle:Post');
-        $posts = $repo->findAll();
 
-        return($posts);
-    }
 }
 

@@ -4,13 +4,12 @@
 
 {% block body %}
     {% for item in posts %}
-        <h1> {{ item.author }}</h1>
-        <p>{{item.content}}</p>
+        <h1> {{ item.getAuthor() }}</h1>
+        <p>{{item.getContent()}}</p>
     {% endfor %}
-(#
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    {{ form_end(form) }}
-#}
+
+{#    {{ form_start(form) }}#}
+{#    {{ form_widget(form) }}#}
+{#   {{ form_end(form) }} #}
 
 {% endblock  %}
