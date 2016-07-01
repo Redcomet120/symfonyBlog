@@ -13,7 +13,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 class SubmitController extends Controller
 {
     /**
-     *  @Route("/form")
+     *  @Route("/form", name="form")
      */
     public function formAction(Request $request)
     {
@@ -27,6 +27,11 @@ class SubmitController extends Controller
             ->add('submit', SubmitType::class, array('label' => 'Submit'))
             ->getForm();
 
+        $form->handleRequest($request);
+
+        if($form->isSubmitted()&& $form->isValid()){
+            return $this->redirectToRoute('form');
+        }
         return $this->render('blog/Form.html.twig', array(
             'form' => $form->createView(),
         ));
