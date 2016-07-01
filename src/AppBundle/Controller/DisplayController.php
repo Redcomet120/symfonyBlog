@@ -11,7 +11,7 @@ use AppBundle\Entity\Post;
 class DisplayController extends Controller
 {
     /**
-     * @Route("/post")
+     * @Route("/post", name="post")
      */
     public function viewAction()
     {

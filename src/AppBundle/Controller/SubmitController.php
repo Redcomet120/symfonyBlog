@@ -30,7 +30,12 @@ class SubmitController extends Controller
         $form->handleRequest($request);
 
         if($form->isSubmitted()&& $form->isValid()){
-            return $this->redirectToRoute('form');
+            $db = $this->getDoctrine()
+                    ->getManager();
+            $db->persist($post);
+            $db->flush();
+
+            return $this->redirectToRoute('post');
         }
         return $this->render('blog/Form.html.twig', array(
             'form' => $form->createView(),
