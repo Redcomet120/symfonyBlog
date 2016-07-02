@@ -16,7 +16,7 @@ class BlogController extends Controller
     /**
      * @Route("/home", name="home")
      */
-    public function viewAction()
+    public function viewAction(Request $request)
     {
         //get all the posts from DB
         $blogs = $this->getDoctrine()
@@ -50,7 +50,7 @@ class BlogController extends Controller
             array('posts'   => $blogs,
                 'form'  =>$form->createView()
         ));
-        
+
         return new Response($html);
     }
 
