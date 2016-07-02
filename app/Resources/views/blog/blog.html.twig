@@ -1,0 +1,14 @@
+{# app/Resources/views/blog/blog.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% for item in posts %}
+        <h1> {{ item.getAuthor() }}</h1>
+        <p>{{item.getContent()}}</p>
+    {% endfor %}
+{% endblock %}
+
+{{ form_start(form) }}
+{{ form_widget(form) }}
+{{ form_end(form) }}
